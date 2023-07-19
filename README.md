@@ -31,7 +31,7 @@ Strategy to see what is the correct version for each package. I run in google co
 
 To run the program check the following functions
 
-# now we can define the strategy
+
 strategy = fl.server.strategy.FedAvg(fraction_fit=1, # let's sample 10% of the client each round to do local training
                                       fraction_evaluate=1, # after each round, let's sample 20% of the clients to asses how well the global model is doing
                                       min_available_clients=4, # total number of clients available in the experiment
