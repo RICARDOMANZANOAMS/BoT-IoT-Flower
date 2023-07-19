@@ -1,6 +1,10 @@
 # BoT-IoT-Flower
 
 
+----------------INSTALL-------------------
+
+
+
 To install Flower locally is necessary to install conda. 
 
 conda create --name flower-federated python=3.10.12
@@ -21,6 +25,35 @@ pip install pydantic==1.10.11
 Verify that the version of pydantic os 1.10.11 and ray 2.5.1. It appears an error if the version of pydantic is greater. I had to downgrade to solve the error
 
 Strategy to see what is the correct version for each package. I run in google colab and pip list the versions. 
+
+
+---------------RUN-----------------------------
+
+To run the program check the following functions
+
+# now we can define the strategy
+strategy = fl.server.strategy.FedAvg(fraction_fit=1, # let's sample 10% of the client each round to do local training
+                                      fraction_evaluate=1, # after each round, let's sample 20% of the clients to asses how well the global model is doing
+                                      min_available_clients=4, # total number of clients available in the experiment
+                                      evaluate_fn=get_evalulate_fn(testloader)) # a callback to a function that the strategy can execute to evaluate the state of the global model on a centralised dataset
+
+
+history = fl.simulation.start_simulation(
+    client_fn=client_fn_callback, # a callback to construct a client
+    num_clients=5, # total number of clients in the experiment
+    config=fl.server.ServerConfig(num_rounds=100), # let's run for 10 rounds
+    strategy=strategy,# the strategy that will orchestrate the whole FL pipeline
+)
+
+
+min_available_clients in strategy should be less that num_clients in history
+fraction_fit in strategy should be 1 to train with all the datasets
+fraction_evaluate in strategy should be 1 to evaluate in all the datasets
+
+
+
+
+
 
 
 
