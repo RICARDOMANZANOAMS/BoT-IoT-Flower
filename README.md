@@ -27,8 +27,11 @@ Verify that the version of pydantic os 1.10.11 and ray 2.5.1. It appears an erro
 Strategy to see what is the correct version for each package. I run in google colab and pip list the versions. 
 
 GPU 
+
 pip install torch==2.0.1+cu118 torchvision==0.15.2+cu118 torchaudio==2.0.2+cu118 --index-url https://download.pytorch.org/whl/cu118
-pip instal pandas
+
+pip instalL pandas
+
 pip install -U scikit-learn
 
 ---------------RUN-----------------------------
